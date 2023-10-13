@@ -21,7 +21,7 @@ window.onload = () => {
                 )
         }
     } else {
-        setError('Error querying API status, try again later or check the <a href=\'https://github.com/Weilbyte/tiktok-tts\'>GitHub</a> repository for more info')
+        setError('We were unable to query the API status. Try again later, or check the <a href=\'https://github.com/Weilbyte/tiktok-tts\'>GitHub</a> repository for more info')
     }  
 }
 
@@ -83,7 +83,7 @@ const submitForm = () => {
     const textLength = new TextEncoder().encode(text).length
     console.log(textLength)
 
-    if (textLength === 0) text = 'The fungus among us.' 
+    if (textLength === 0) text = 'The quick brown fox jumps over the lazy dog.' 
     const voice = document.getElementById('voice').value
 
     if(voice == "none") {
@@ -109,12 +109,12 @@ const submitForm = () => {
 
         let resp = JSON.parse(req.responseText)
         if (resp.data === null) {
-            setError(`<b>Generation failed</b><br/> ("${resp.error}")`)
+            setError(`<b>Generation was unsuccessful</b><br/> ("${resp.error}")`)
         } else {
             setAudio(resp.data, text)
         }  
     } catch {
-        setError('Error submitting form (printed to F12 console)')
+        setError('Something went wrong. (printed to F12 console)')
         console.log('^ Please take a screenshot of this and create an issue on the GitHub repository if one does not already exist :)')
         console.log('If the error code is 503, the service is currently unavailable. Please try again later.')
         console.log(`Voice: ${voice}`)
